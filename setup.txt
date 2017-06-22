@@ -1,0 +1,80 @@
+Requirements :
+
+1. python
+2. Elastic Search
+
+===================
+
+Set Mapping for ES :
+
+
+1. mapping for the transactions - (transactions)
+
+{
+  "properties": {
+    "btc_address": {
+      "type": "string",
+      "index": "not_analyzed"
+    },
+    "date": {
+      "type":"date"
+    },
+    "total_received": {
+      "type": "long"
+    },
+    "total_sent": {
+      "type": "long"
+    },
+    "final_balance": {
+      "type": "long"
+    },
+    "transaction_amount": {
+      "type": "long"
+    },
+    "others_btc_address": {
+      "type": "string",
+      "index": "not_analyzed"
+    },
+    "transaction_type": {
+      "type": "string",
+    },
+    "transaction_id": {
+      "type": "string",
+      "index": "not_analyzed"
+    }.
+    "comments": {
+      "type": "string",
+      "index": "not_analyzed"
+    }
+  }
+}
+
+2. mapping for the BTC Address Table - (btcaddr)
+
+{
+  "properties": {
+    "btc_address": {
+      "type": "string",
+      "index": "not_analyzed"
+    },
+    "added_date": {
+      "type":"date"
+    },
+    "comment": {
+      "type": "string",
+      "index": "not_analyzed"
+    }
+  }
+}
+
+============================
+
+Add BTC Address to ES 
+
+curl -XPOST 'http://localhost:9200/btcmon/btcaddr/{btc_addr}' -d '{ "btc_address" : "{btc_addr}", "added_date" : "2016-09-27T14:12:12", "comment" : "trying out Elasticsearch" }'
+
+==============================
+
+Usage : python btcmon.py
+
+
